@@ -3,6 +3,7 @@ import 'package:e_commerce_app/Utils/api.dart';
 import 'package:e_commerce_app/screens/category/product_view.dart';
 import 'package:e_commerce_app/screens/home/home_screen_controller.dart';
 import 'package:e_commerce_app/screens/home/product_details.dart';
+import 'package:e_commerce_app/screens/home/product_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -144,8 +145,9 @@ class HomeScreenView extends StatelessWidget {
           itemBuilder:(context, index) => InkWell(
             onTap: (){
               print('Index:$index');
-
-              _controller.selectedItemIndex.value=index;
+              //Get.find<ProductDetailsController>().selectedItemIndex.value=index; //Data stored by Another dependency injection
+              Get.put(ProductDetailsController()).selectedItemIndex.value=index; // Data stored by Dependency injection example-one
+              print('Index Received:${Get.put(ProductDetailsController()).selectedItemIndex.value}');
               Get.toNamed(ProductDetails.routeName);
             },
             child: ProductView(

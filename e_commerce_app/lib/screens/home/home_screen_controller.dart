@@ -15,7 +15,6 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
   var scrollbarController= ScrollController();
   var productDataList= <Products>[].obs;
   var localDataList=<HiveEntity>[].obs;
-  var selectedItemIndex=0.obs;
   //RxObjectMixin <CategoryModel> categoryData= CategoryModel().obs;
 
   @override
@@ -35,6 +34,7 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
           var productList= response.data["products"] as List;
           var imagepath=response.data["products"][0]["image"][0];
           print('IMage path:$imagepath');
+          print('Status Code:${response.statusCode}');
           var myProductList= productList.map((e) => Products.fromJson(e));
           productDataList.addAll(myProductList);
           print('Product Data length: ${myProductList.length}');

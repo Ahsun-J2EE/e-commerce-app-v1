@@ -2,12 +2,14 @@
 import 'package:e_commerce_app/Utils/api.dart';
 import 'package:e_commerce_app/screens/home/product_details_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
-import 'home_screen_controller.dart';
 
 class ProductDetails extends StatelessWidget {
 static const String routeName='/product_details';
 final ProductDetailsController _controller= Get.put(ProductDetailsController());
+
+   ProductDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,25 +22,34 @@ final ProductDetailsController _controller= Get.put(ProductDetailsController());
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               color: Colors.white,
               height: 200,
               width: double.infinity,
               child: Obx(()=>Image.network(API.productImageUrl+_controller.productDataList.value[_controller.selectedItemIndex.value].image![0].toString())),
             ),
             Container(
-              margin: EdgeInsets.only(right: 10, left: 10),
+              margin: const EdgeInsets.only(right: 10, left: 10),
               color: Colors.white,
               height: 40,
               width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Padding(padding: EdgeInsets.only(left: 10),
+                  child: Text('')),
 
+                  Padding(padding: EdgeInsets.only(right: 10),
+                  child: Text("Cart")),
+                ],
+              ),
             ),
             Container(
-              margin: EdgeInsets.only(right: 10, left: 10),
+              margin: const EdgeInsets.only(right: 10, left: 10),
               color: Colors.white,
-              height: 40,
+              height: 200,
               width: double.infinity,
-
+              child: Obx(()=>Html(data: _controller.productDataList.value[_controller.selectedItemIndex.value].description,)) ,
             ),
           ],
         ),

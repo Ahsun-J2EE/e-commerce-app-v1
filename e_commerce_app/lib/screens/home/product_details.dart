@@ -29,18 +29,19 @@ final ProductDetailsController _controller= Get.put(ProductDetailsController());
               child: Obx(()=>Image.network(API.productImageUrl+_controller.productDataList.value[_controller.selectedItemIndex.value].image![0].toString())),
             ),
             Container(
-              margin: const EdgeInsets.only(right: 10, left: 10),
+              margin: EdgeInsets.only(right: 10, left: 10),
               color: Colors.white,
               height: 40,
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children:[
                   Padding(padding: EdgeInsets.only(left: 10),
-                  child: Text('')),
+                   child: Text(_controller.productDataList.value[_controller.selectedItemIndex.value].price.toString()??'0'),
+                  ),
 
                   Padding(padding: EdgeInsets.only(right: 10),
-                  child: Text("Cart")),
+                  child: Icon(Icons.shopping_cart)),
                 ],
               ),
             ),

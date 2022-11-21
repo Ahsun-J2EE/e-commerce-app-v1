@@ -20,7 +20,7 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
   @override
   void onInit() {
     tabController=TabController(length: 4, vsync: this);
-    _getLocalData();
+    getLocalData();
     _categoryData();
     super.onInit();
   }
@@ -47,15 +47,35 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
       }
   }
 
-  void _getLocalData() async{
+  void getLocalData() async{
     var box= await Hive.openBox<HiveEntity>('habib_app_database');
-    //box.add(HiveEntity(name: 'Mobile phone 1', price: '99', id: '110'));
-    //box.add(HiveEntity(name: 'Mobile phone 2', price: '199', id: '111'));
     localDataList.value=box.values.toList();
-
     print('localData list length ${localDataList.length}');
   }
 
+  void insertShoppingCartData(HiveEntity entity) async{
+    var box= await Hive.openBox<HiveEntity>('habib_app_database');
+    box.add(entity);
+    getLocalData();
+  }
+
+  void deleteShoppingCartData(int index) async{
+    var box= await Hive.openBox<HiveEntity>('habib_app_database');
+    box.deleteAt(index);
+    getLocalData();
+  }
+
+  void updateShoppingCartData(int index, HiveEntity entity) async{
+    var box= await Hive.openBox<HiveEntity>('habib_app_database');
+    box.putAt(index, entity);
+    getLocalData();
+  }
+
+  void clearAllShoppingCartData(int index, HiveEntity entity) async{
+    var box= await Hive.openBox<HiveEntity>('habib_app_database');
+    await box.clear();
+    getLocalData();
+  }
 // var sharedUsername=''.obs;
 // var sharedEmail=''.obs;
 // var sharedPhone=''.obs;

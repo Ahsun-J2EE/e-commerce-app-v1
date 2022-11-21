@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_app/Utils/api.dart';
+import 'package:e_commerce_app/Utils/hive_database/hive_entity.dart';
 import 'package:e_commerce_app/screens/category/product_view.dart';
 import 'package:e_commerce_app/screens/home/home_screen_controller.dart';
 import 'package:e_commerce_app/screens/home/product_details.dart';
@@ -159,7 +160,11 @@ class HomeScreenView extends StatelessWidget {
                 print('Favorite Status:${_controller.productDataList.value![index].isFavorite}');
               },
               cartCallBack: () {
-                print('Cart clicked');
+                _controller.insertShoppingCartData(HiveEntity(
+                    name: '${_controller.productDataList.value[index].name}',
+                    price: '\$${_controller.productDataList.value[index].price}',
+                    id: '${_controller.productDataList.value[index].id}',
+                    image: API.productImageUrl+_controller.productDataList.value[index].image![0].toString()));
               },
             ),
           ))),
@@ -167,6 +172,7 @@ class HomeScreenView extends StatelessWidget {
  }
 
   _cartTab() {
+    _controller.getLocalData();
     return Obx(()=>ListView.builder(
       itemCount: _controller.localDataList.length,
       itemBuilder: (context, index) => Container(

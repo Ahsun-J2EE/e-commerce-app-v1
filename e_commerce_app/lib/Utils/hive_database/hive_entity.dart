@@ -14,10 +14,14 @@ class HiveEntity{
   @HiveField(2)
   final String id;
 
+  @HiveField(3)
+  final String image;
+
   HiveEntity({
     required this.name,
     required this.price,
     required this.id,
+    required this.image
 });
 
 }

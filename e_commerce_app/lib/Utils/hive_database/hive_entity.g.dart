@@ -17,17 +17,16 @@ class HiveEntityAdapter extends TypeAdapter<HiveEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HiveEntity(
-      name: fields[0] as String,
-      price: fields[1] as String,
-      id: fields[2] as String,
-      image: fields[3] as String
+      name: fields[0],
+      price: fields[1],
+      id: fields[2],
+      image: fields[3]
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveEntity obj) {
     writer
-      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)

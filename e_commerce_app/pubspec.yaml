@@ -32,7 +32,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   carousel_slider: ^4.1.1
@@ -41,6 +40,9 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_easyloading: ^3.0.5
   flutter_html: ^2.2.1
+  badges: ^2.0.3
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

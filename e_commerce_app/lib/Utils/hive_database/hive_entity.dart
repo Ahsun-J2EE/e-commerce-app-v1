@@ -6,16 +6,16 @@ part 'hive_entity.g.dart';
 class HiveEntity{
 
   @HiveField(0)
-  final String name;
+  final dynamic name;
 
   @HiveField(1)
-  final String price;
+  final dynamic price;
 
   @HiveField(2)
-  final String id;
+  final dynamic id;
 
   @HiveField(3)
-  final String image;
+  final dynamic image;
 
   HiveEntity({
     required this.name,

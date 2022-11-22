@@ -5,7 +5,7 @@ class Products {
       this.id, 
       this.name, 
       this.description, 
-      this.image, 
+      required this.image,
       this.price, 
       this.variations, 
       this.tax, 
@@ -32,7 +32,7 @@ class Products {
     id = json['id'];
     name = json['name'];
     description = json['description'];
-    image = json['image'] != null ? json['image'].cast<String>() : [];
+    image = json['image'] != null? json['image'].cast<String>() : [];
     price = json['price'];
     // if (json['variations'] != null) {
     //   variations = [];
@@ -78,28 +78,28 @@ class Products {
     //   });
     // }
   }
-  dynamic? id;
-  String? name;
-  String? description;
-  List<String>? image;
-  dynamic? price;
+  dynamic id;
+  dynamic name;
+  dynamic description;
+  dynamic image;
+  dynamic price;
   List<dynamic>? variations;
-  dynamic? tax;
-  dynamic? status;
+  dynamic tax;
+  dynamic status;
   String? createdAt;
   String? updatedAt;
   List<dynamic>? attributes;
   List<CategoryIds>? categoryIds;
   List<dynamic>? choiceOptions;
-  dynamic? discount;
+  dynamic discount;
   String? discountType;
   String? taxType;
   String? unit;
-  dynamic? totalStock;
-  dynamic? capacity;
-  dynamic? dailyNeeds;
-  dynamic? popularityCount;
-  dynamic? wishlistCount;
+  dynamic totalStock;
+  dynamic capacity;
+  dynamic dailyNeeds;
+  dynamic popularityCount;
+  dynamic wishlistCount;
   List<dynamic>? rating;
   dynamic isFavorite;
 

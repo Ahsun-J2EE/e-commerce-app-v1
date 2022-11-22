@@ -7,6 +7,7 @@ import 'package:e_commerce_app/screens/home/product_details.dart';
 import 'package:e_commerce_app/screens/home/product_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:badges/badges.dart';
 
 class HomeScreenView extends StatelessWidget {
   static const String routeName='/home_screen_view';
@@ -24,15 +25,19 @@ class HomeScreenView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('E-commerce app')),
+        automaticallyImplyLeading: true,
+        title: const Center(child: Text('E-commerce app')),
         actions: [
-          IconButton(
-              onPressed: (){},
-              icon: Icon(Icons.search)
-          ),
-          IconButton(
-              onPressed: (){},
-              icon: Icon(Icons.shopping_cart)
+          // IconButton(
+          //     onPressed: (){},
+          //     icon: const Icon(Icons.search)
+          // ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10, top: 5),
+            child: Badge(
+              badgeContent: Obx(()=>Text(_controller.localDataList.length.toString())),
+              child: const Icon(Icons.shopping_cart_outlined),
+            ),
           ),
         ],
         // bottom: TabBar(
@@ -80,21 +85,24 @@ class HomeScreenView extends StatelessWidget {
              _controller.update();
              print('Received$index');
            },
-           items: const [
-             BottomNavigationBarItem(
+           items: [
+             const BottomNavigationBarItem(
                  icon: Icon(Icons.home),
                  label: 'Home'
              ),
-             BottomNavigationBarItem(
+             const BottomNavigationBarItem(
                  icon: Icon(Icons.category),
                  label: 'Category'
              ),
-             BottomNavigationBarItem(
+             const BottomNavigationBarItem(
                  icon: Icon(Icons.person),
                  label: 'Profile'
              ),
              BottomNavigationBarItem(
-                 icon: Icon(Icons.shopping_cart),
+                 icon: Badge(
+                   badgeContent: Obx(()=>Text(_controller.localDataList.length.toString())),
+                   child: const Icon(Icons.shopping_cart_outlined),
+                 ),
                  label: 'Cart'
              ),
            ]
@@ -181,8 +189,8 @@ class HomeScreenView extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: Colors.grey.shade300,
           ),
-          margin: EdgeInsets.only(left: 5, right: 5, top: 5),
-          child: Center(child: Text(_controller.localDataList[index].name!))),
+          margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
+          child: Center(child: Text(_controller.localDataList[index].name.toString()))),
     ));
   }
 }

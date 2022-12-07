@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/Utils/api.dart';
 import 'package:e_commerce_app/Utils/hive_database/hive_entity.dart';
@@ -13,7 +11,7 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
 
   late TabController tabController;
   var scrollbarController= ScrollController();
-  var productDataList= <Products>[].obs;
+  var productDataList=<Products>[].obs;
   var localDataList=<HiveEntity>[].obs;
   //RxObjectMixin <CategoryModel> categoryData= CategoryModel().obs;
 

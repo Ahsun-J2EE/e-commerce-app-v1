@@ -46,26 +46,27 @@ final ProductDetailsController _controller= Get.put(ProductDetailsController());
               child: Obx(()=>Image.network(API.productImageUrl+_controller.productDataList.value[_controller.selectedItemIndex.value].image![0].toString())),
             ),
             Container(
-              margin: EdgeInsets.only(right: 10, left: 10),
+              margin: const EdgeInsets.only(right: 10, left: 10),
               color: Colors.white,
               height: 40,
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[
-                  Padding(padding: EdgeInsets.only(left: 10),
+                  Padding(padding: const EdgeInsets.only(left: 10),
                    child: Text(_controller.productDataList.value[_controller.selectedItemIndex.value].price.toString()??'0'),
 
                   ),
 
                   Padding(padding: const EdgeInsets.only(right: 10),
-                  child: IconButton(
+                   child: IconButton(
                     onPressed: () {
                       Get.put(HomeScreenController()).insertShoppingCartData( HiveEntity(
                           name: '${_controller.productDataList.value[_controller.selectedItemIndex.value].name}',
                           price: '\$${_controller.productDataList.value[_controller.selectedItemIndex.value].price}',
                           id: '${_controller.productDataList.value[_controller.selectedItemIndex.value].id}',
-                          image: API.productImageUrl+_controller.productDataList.value[_controller.selectedItemIndex.value].image![0].toString()));
+                          image: API.productImageUrl+_controller.productDataList.value[_controller.selectedItemIndex.value].image![0].toString(),
+                          quantity: 1));
                     },
                     icon: const Icon(Icons.shopping_cart_outlined),),
                   )

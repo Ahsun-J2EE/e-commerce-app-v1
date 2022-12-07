@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_app/Utils/api.dart';
 import 'package:e_commerce_app/Utils/hive_database/hive_entity.dart';
@@ -7,7 +8,6 @@ import 'package:e_commerce_app/screens/home/product_details.dart';
 import 'package:e_commerce_app/screens/home/product_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:badges/badges.dart';
 
 class HomeScreenView extends StatelessWidget {
   static const String routeName='/home_screen_view';
@@ -15,6 +15,8 @@ class HomeScreenView extends StatelessWidget {
   final HomeScreenController _controller= Get.put(HomeScreenController());
   var screenHeight=0.0;
   var screenWidth=0.0;
+
+  HomeScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +27,17 @@ class HomeScreenView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
         title: const Center(child: Text('E-commerce app')),
         actions: [
-          // IconButton(
-          //     onPressed: (){},
-          //     icon: const Icon(Icons.search)
-          // ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10, top: 5),
-            child: Badge(
-              badgeContent: Obx(()=>Text(_controller.localDataList.length.toString())),
-              child: const Icon(Icons.shopping_cart_outlined),
-            ),
+          IconButton(
+              onPressed: (){},
+              icon: const Icon(Icons.search)
+          ),
+          IconButton(
+              onPressed: (){},
+              icon: Badge(
+                badgeContent: Obx(()=>Text(_controller.localDataList.length.toString())),
+                  child: const Icon(Icons.shopping_cart))
           ),
         ],
         // bottom: TabBar(
@@ -50,39 +50,37 @@ class HomeScreenView extends StatelessWidget {
         //   ],
         // ),
       ),
-      drawer: Drawer(),
-      body: Container(
-        child: TabBarView(
-          controller: _controller.tabController,
-            children:[
-              Container(
-                margin: EdgeInsets.all(10),
-                color: Color(0xFF0F2F5),
-                child: _HomeTab()
-              ),
-              Container(
-                child: Center(child: Text('Category Page')),
-                color: Colors.greenAccent,
-              ),
-              Container(
-                child: Center(child: Text('Profile Page')),
-                color: Colors.blue,
-              ),
-              Container(
-                child: _cartTab(),
-                //color: Colors.amber,
-              ),
-            ] ),
-      ),
-      bottomNavigationBar: GetBuilder<HomeScreenController>(builder: (_controller)=>BottomNavigationBar(
+      drawer: const Drawer(),
+      body: TabBarView(
+        controller: _controller.tabController,
+          children:[
+            Container(
+              margin: const EdgeInsets.all(10),
+              color: const Color(0x0ff0f2f5),
+              child: _HomeTab()
+            ),
+            Container(
+              color: Colors.greenAccent,
+              child: const Center(child: Text('Category Page')),
+            ),
+            Container(
+              child: _cartTab(),
+              //color: Colors.amber,
+            ),
+            Container(
+              color: Colors.blue,
+              child: const Center(child: Text('Profile Page')),
+            ),
+          ] ),
+      bottomNavigationBar: GetBuilder<HomeScreenController>(builder: (controller)=>BottomNavigationBar(
            type: BottomNavigationBarType.fixed,
            selectedItemColor: Colors.blue ,
            unselectedItemColor: Colors.black ,
-           currentIndex: _controller.tabController.index,
+           currentIndex: controller.tabController.index,
            onTap: (index){
              print('Sending$index');
-             _controller.tabController.index=index;
-             _controller.update();
+             controller.tabController.index=index;
+             controller.update();
              print('Received$index');
            },
            items: [
@@ -94,16 +92,15 @@ class HomeScreenView extends StatelessWidget {
                  icon: Icon(Icons.category),
                  label: 'Category'
              ),
-             const BottomNavigationBarItem(
-                 icon: Icon(Icons.person),
-                 label: 'Profile'
-             ),
              BottomNavigationBarItem(
                  icon: Badge(
                    badgeContent: Obx(()=>Text(_controller.localDataList.length.toString())),
-                   child: const Icon(Icons.shopping_cart_outlined),
-                 ),
+                     child: const Icon(Icons.shopping_cart)),
                  label: 'Cart'
+             ),
+             const BottomNavigationBarItem(
+                 icon: Icon(Icons.person),
+                 label: 'Profile'
              ),
            ]
        ),),
@@ -172,7 +169,8 @@ class HomeScreenView extends StatelessWidget {
                     name: '${_controller.productDataList.value[index].name}',
                     price: '\$${_controller.productDataList.value[index].price}',
                     id: '${_controller.productDataList.value[index].id}',
-                    image: API.productImageUrl+_controller.productDataList.value[index].image![0].toString()));
+                    image: API.productImageUrl+_controller.productDataList.value[index].image![0].toString(),
+                    quantity: 1));
               },
             ),
           ))),
@@ -190,7 +188,7 @@ class HomeScreenView extends StatelessWidget {
             color: Colors.grey.shade300,
           ),
           margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
-          child: Center(child: Text(_controller.localDataList[index].name.toString()))),
+          child: Center(child: Text(_controller.localDataList[index].name??''))),
     ));
   }
 }

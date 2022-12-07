@@ -32,19 +32,19 @@ class ProductView extends StatelessWidget {
           ),
           height: 200,
           width: double.infinity,
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: Column(
             children: [
               Container(
                 height: 80,
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Image.network(image!,fit: BoxFit.cover,),
               ),
-              Container(
+              SizedBox(
                 height: 30,
                 child: Text(name!),
               ),
-              Container(
+              SizedBox(
                 height: 30,
                 child: Text(price!),
               ),
@@ -63,7 +63,7 @@ class ProductView extends StatelessWidget {
             top: 10,
             child: IconButton(
                 onPressed: cartCallBack,
-                icon: Icon(Icons.shopping_cart))
+                icon: const Icon(Icons.shopping_cart))
         ),
       ],
     );

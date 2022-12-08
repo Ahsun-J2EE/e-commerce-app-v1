@@ -182,13 +182,51 @@ class HomeScreenView extends StatelessWidget {
     return Obx(()=>ListView.builder(
       itemCount: _controller.localDataList.length,
       itemBuilder: (context, index) => Container(
-          height: 60,
+          height: 120,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.grey.shade300,
+            //color: Colors.grey.shade300,
           ),
-          margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
-          child: Center(child: Text(_controller.localDataList[index].name??''))),
+          margin: EdgeInsets.only(left:screenWidth*0.01, right: screenWidth*0.0, top: 5),
+          child: Row(
+            children: [
+              Container(
+                //color: Colors.green,
+                height: 120,
+                width: screenWidth*0.3,
+                child: Image.network(_controller.localDataList[index].image??''),
+              ),
+              Container(
+                //color: Colors.blue,
+                height: 120,
+                width: screenWidth*0.61,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(_controller.localDataList[index].name??'', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 5),
+                    Text(_controller.calculateItemTotalPrice(_controller.localDataList[index].price, _controller.localDataList[index].quantity), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(right: 5),
+                //color: Colors.blue,
+                height: 120,
+                width: screenWidth*0.07,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(onPressed: (){}, icon: const Center(child: Icon(Icons.add))),
+                    const Center(child: Text('1')),
+                    IconButton(onPressed: (){}, icon: const Center(child: Icon(Icons.minimize)))
+                  ],
+                ),
+              )
+            ],
+          )),
     ));
   }
 }

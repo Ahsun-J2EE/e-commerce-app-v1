@@ -18,8 +18,8 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
   @override
   void onInit() {
     tabController=TabController(length: 4, vsync: this);
-    getLocalData();
     _categoryData();
+    getLocalData();
     super.onInit();
   }
   void _categoryData() async{
@@ -73,6 +73,10 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
     var box= await Hive.openBox<HiveEntity>('habib_app_database');
     await box.clear();
     getLocalData();
+  }
+  String calculateItemTotalPrice(String price, int quantity) {
+
+    return '';
   }
 // var sharedUsername=''.obs;
 // var sharedEmail=''.obs;

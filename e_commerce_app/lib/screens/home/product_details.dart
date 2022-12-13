@@ -63,7 +63,7 @@ final ProductDetailsController _controller= Get.put(ProductDetailsController());
                     onPressed: () {
                       Get.put(HomeScreenController()).insertShoppingCartData( HiveEntity(
                           name: '${_controller.productDataList.value[_controller.selectedItemIndex.value].name}',
-                          price: '\$${_controller.productDataList.value[_controller.selectedItemIndex.value].price}',
+                          price: '${_controller.productDataList.value[_controller.selectedItemIndex.value].price}',
                           id: '${_controller.productDataList.value[_controller.selectedItemIndex.value].id}',
                           image: API.productImageUrl+_controller.productDataList.value[_controller.selectedItemIndex.value].image![0].toString(),
                           quantity: 1));

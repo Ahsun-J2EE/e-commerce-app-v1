@@ -71,12 +71,12 @@ class HomeScreenController extends GetxController with GetSingleTickerProviderSt
 
   void clearAllShoppingCartData(int index, HiveEntity entity) async{
     var box= await Hive.openBox<HiveEntity>('habib_app_database');
-    await box.clear();
     getLocalData();
   }
-  String calculateItemTotalPrice(String price, int quantity) {
-
-    return '';
+  String calculateItemTotalPrice(String price, dynamic quantity) {
+    var p= double.parse(price);
+    var total=p*quantity;
+    return '$total';
   }
 // var sharedUsername=''.obs;
 // var sharedEmail=''.obs;

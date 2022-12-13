@@ -206,7 +206,7 @@ class HomeScreenView extends StatelessWidget {
                   children: [
                     Text(_controller.localDataList[index].name??'', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 5),
-                    Text(_controller.calculateItemTotalPrice(_controller.localDataList[index].price, _controller.localDataList[index].quantity), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    Text(_controller.calculateItemTotalPrice(_controller.localDataList[index].price??'', _controller.localDataList[index].quantity??1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),

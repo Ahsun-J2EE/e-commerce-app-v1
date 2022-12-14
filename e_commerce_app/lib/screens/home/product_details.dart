@@ -1,4 +1,3 @@
-
 import 'package:badges/badges.dart';
 import 'package:e_commerce_app/Utils/api.dart';
 import 'package:e_commerce_app/screens/home/home_screen_controller.dart';
@@ -13,9 +12,9 @@ class ProductDetails extends StatelessWidget {
 static const String routeName='/product_details';
 final ProductDetailsController _controller= Get.put(ProductDetailsController());
 
-   ProductDetails({super.key});
+ProductDetails({super.key});
 
-  @override
+@override
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: const Color(0xFFF0F2F5),
@@ -54,7 +53,7 @@ final ProductDetailsController _controller= Get.put(ProductDetailsController());
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[
                   Padding(padding: const EdgeInsets.only(left: 10),
-                   child: Text(_controller.productDataList.value[_controller.selectedItemIndex.value].price.toString()??'0'),
+                   child: Text(_controller.productDataList.value[_controller.selectedItemIndex.value].price.toString()),
 
                   ),
 
@@ -63,7 +62,7 @@ final ProductDetailsController _controller= Get.put(ProductDetailsController());
                     onPressed: () {
                       Get.put(HomeScreenController()).insertShoppingCartData( HiveEntity(
                           name: '${_controller.productDataList.value[_controller.selectedItemIndex.value].name}',
-                          price: '${_controller.productDataList.value[_controller.selectedItemIndex.value].price}',
+                          price: _controller.productDataList.value[_controller.selectedItemIndex.value].price.toString(),
                           id: '${_controller.productDataList.value[_controller.selectedItemIndex.value].id}',
                           image: API.productImageUrl+_controller.productDataList.value[_controller.selectedItemIndex.value].image![0].toString(),
                           quantity: 1));

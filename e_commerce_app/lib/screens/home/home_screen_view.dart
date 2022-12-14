@@ -167,7 +167,7 @@ class HomeScreenView extends StatelessWidget {
               cartCallBack: () {
                 _controller.insertShoppingCartData(HiveEntity(
                     name: '${_controller.productDataList.value[index].name}',
-                    price: '\$${_controller.productDataList.value[index].price}',
+                    price: _controller.productDataList.value[index].price.toString(),
                     id: '${_controller.productDataList.value[index].id}',
                     image: API.productImageUrl+_controller.productDataList.value[index].image![0].toString(),
                     quantity: 1));
@@ -194,7 +194,23 @@ class HomeScreenView extends StatelessWidget {
                 //color: Colors.green,
                 height: 120,
                 width: screenWidth*0.3,
-                child: Image.network(_controller.localDataList[index].image??''),
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      width: screenWidth*0.3,
+                      child: Image.network(_controller.localDataList[index].image??''),
+                    ),
+                    Positioned(
+                      top: 60,
+                        left: 10,
+                        child: IconButton(
+                            onPressed: (){
+                              _controller.deleteShoppingCartData(index);
+                            },
+                            icon: const Center(child: Icon(Icons.delete_forever, color: Colors.red,)))
+                    )
+                  ],
+                ),
               ),
               Container(
                 //color: Colors.blue,
@@ -206,7 +222,7 @@ class HomeScreenView extends StatelessWidget {
                   children: [
                     Text(_controller.localDataList[index].name??'', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 5),
-                    Text(_controller.calculateItemTotalPrice(_controller.localDataList[index].price??'', _controller.localDataList[index].quantity??1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    Text(_controller.calculateItemTotalPrice(_controller.localDataList[index].price.toString(), _controller.localDataList[index].quantity??1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
@@ -219,9 +235,31 @@ class HomeScreenView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    IconButton(onPressed: (){}, icon: const Center(child: Icon(Icons.add))),
-                    const Center(child: Text('1')),
-                    IconButton(onPressed: (){}, icon: const Center(child: Icon(Icons.minimize)))
+                    IconButton(
+                        onPressed: (){
+                          _controller.updateShoppingCartData(index,HiveEntity(
+                              name: '${_controller.productDataList.value[index].name}',
+                              price: _controller.productDataList.value[index].price.toString(),
+                              id: '${_controller.productDataList.value[index].id}',
+                              image: _controller.localDataList.value[index].image!,
+                              quantity: _controller.localDataList[index].quantity+1));
+                        },
+                        icon: const Center(child: Icon(Icons.add))),
+                     Center(child: Text(_controller.localDataList[index].quantity.toString())),
+                    IconButton(
+                        onPressed: (){
+                          if(_controller.localDataList[index].quantity>1){
+                            _controller.updateShoppingCartData(index,HiveEntity(
+                                name: '${_controller.productDataList.value[index].name}',
+                                price: _controller.productDataList.value[index].price.toString(),
+                                id: '${_controller.productDataList.value[index].id}',
+                                image: _controller.localDataList.value[index].image!,
+                                quantity: _controller.localDataList[index].quantity-1));
+                          }else{
+
+                          }
+                        },
+                        icon: const Center(child: Icon(Icons.minimize)))
                   ],
                 ),
               )
